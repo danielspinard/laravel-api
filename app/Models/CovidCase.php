@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class CovidCase extends Model
 {
     use HasFactory;
+
+    /**
+     * @var array
+     */
+    protected $fillable = [
+        'cases', 'report_date'
+    ];
 }
