@@ -2,20 +2,28 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Support\Facades\Cache;
 use App\Http\Resources\CaseResource;
 use App\Models\CovidCase;
 
 class CaseController extends Controller
 {
     /**
+     * @const int
+     */
+    private const TTL_IN_SECONDS = 3600;
+
+    /**
      * @return AnonymousResourceCollection
      */
     public function index(): AnonymousResourceCollection
     {
-        return CaseResource::collection(
-            CovidCase::all()
-        );
+        $cases = Cache::remember('cases', CaseController::TTL_IN_SECONDS, function () {
+            return CovidCase::all();
+        });
+        
+        return CaseResource::collection($cases);
     }
 }
