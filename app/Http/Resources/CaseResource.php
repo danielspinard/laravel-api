@@ -13,7 +13,6 @@ class CaseResource extends JsonResource
     public function toArray($request): array
     {
         return [
-            'id' => $this->id,
             'cases' => $this->cases,
             'report_date' => $this->report_date->format('m/d/Y')
         ];
