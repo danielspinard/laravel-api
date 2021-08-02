@@ -15,6 +15,8 @@ class CreateCovidCasesTable extends Migration
     {
         Schema::create('covid_cases', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('cases');
+            $table->timestamp('report_date');
             $table->timestamps();
         });
     }
