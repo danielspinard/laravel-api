@@ -15,4 +15,11 @@ class CovidCase extends Model
     protected $fillable = [
         'cases', 'report_date'
     ];
+
+    /**
+     * @var array
+     */
+    protected $dates = [
+        'report_date'
+    ];
 }
