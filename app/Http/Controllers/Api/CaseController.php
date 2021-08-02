@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers\Api;
 
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\Collection as EloquentCollection;
+use App\Http\Resources\CaseResource;
 use App\Models\CovidCase;
 
 class CaseController extends Controller
 {
     /**
-     * @return EloquentCollection
+     * @return AnonymousResourceCollection
      */
-    public function index(): EloquentCollection
+    public function index(): AnonymousResourceCollection
     {
-        return CovidCase::all();
+        return CaseResource::collection(
+            CovidCase::all()
+        );
     }
 }
